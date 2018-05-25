@@ -1,19 +1,19 @@
 var friendsArray = [
     {
         
-        name:"Ahmed",
-        photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        name:"Alvaro Castelan",
+        photo:"https://media.licdn.com/dms/image/C4E03AQHdeyE9Dca-AA/profile-displayphoto-shrink_200_200/0?e=1532563200&v=beta&t=CMpqmVRNOJ-qJxDaQ_6wo6njVpaNcDfQvIr6PeBVrLw",
         scores:[
-            5,
-            1,
             4,
-            4,
+            3,
             5,
-            1,
             2,
-            5,
             4,
-            1
+            2,
+            4,
+            3,
+            3,
+            5
           ]
       
 }, 

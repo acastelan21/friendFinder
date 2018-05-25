@@ -173,7 +173,7 @@
       </div>
       <div class="modal-body">
         <div id="matchName"></div>
-        <img id="matchPhoto" src="" alt="match photo" width=250px>
+        <img id="matchPhoto" src="file://null" alt="match photo" width=250px>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -215,7 +215,7 @@
       $.post("/api/friends", newFriend,
           function(data){
           $("#matchName").text(data.name);
-          $("#matchPhoto").attr("src",data.photoLink);
+          $("#matchPhoto").attr("src",data.photo);
           $("#exampleModal").modal("toggle");
             //$("")
              // $("friend-name").val(""),
