@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Friend Finder</title>
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>FriendFinder</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,500,700%7CIM+Fell+French+Canon+SC%7COswald:400,600%7CRoboto:400,700" rel="stylesheet">
    
 </head>
 <body>
@@ -145,7 +151,7 @@
 
     <br>
     <br>
-    <button type="submit" class="btn btn-primary submit" id="add-btn" data-toggle="modal" data-target="#myModal">Submit</button>
+    <button type="submit" class="btn btn-primary submit" id="add-btn" data-target="#myModal">Submit</button>
           </form>
 
 
@@ -188,9 +194,8 @@
   console.log("script working");
   $(".submit").on("click", function(event) {
       event.preventDefault();
-      $("#myModal").modal("show");
+      
       var newFriend = {
-
           name: $("#friend-name").val().trim(),
           photo: $("#photoLink").val().trim(), 
           scores: [
@@ -211,18 +216,13 @@
           function(data){
           $("#matchName").text(data.name);
           $("#matchPhoto").attr("src",data.photoLink);
-
+          $("#exampleModal").modal("toggle");
             //$("")
              // $("friend-name").val(""),
              // $("photoLink").val("")
           });
-
-      
-    
-        $("#myModal").modal({show: true});
-    
-
          
+          
   });
   function runFriendQuery() {
   
