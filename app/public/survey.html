@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Friend Finder</title>
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
    
 </head>
@@ -142,16 +145,42 @@
 
     <br>
     <br>
-    <button type="submit" class="btn btn-primary submit" id="add-btn">Submit</button>
+    <button type="submit" class="btn btn-primary submit" id="add-btn" data-toggle="modal" data-target="#myModal">Submit</button>
           </form>
 
 
    
     </div>
     <hr>
-    <footer>
-      <!--links for json and github-->  
-    </footer>
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your friend match is...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="matchName"></div>
+        <img id="matchPhoto" src="" alt="match photo" width=250px>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+    <div class="container">
+      <p><a href="api/friends">API Table Link</a> | <a href="https://github.com/acastelan21/friendFinder">GitHub Repo</a></p>
+    </div>
+  </footer>
     
 </body>
 </html>
@@ -159,8 +188,9 @@
   console.log("script working");
   $(".submit").on("click", function(event) {
       event.preventDefault();
-      
+      $("#myModal").modal("show");
       var newFriend = {
+
           name: $("#friend-name").val().trim(),
           photo: $("#photoLink").val().trim(), 
           scores: [
@@ -179,16 +209,20 @@
       console.log(newFriend);
       $.post("/api/friends", newFriend,
           function(data){
-            console.log("inside function")
-              if(data){
-                  alert("It's working")
-              }
-              else{
-                  alert("Not working")
-              }
-              $("friend-name").val(""),
-              $("photoLink").val("")
+          $("#matchName").text(data.name);
+          $("#matchPhoto").attr("src",data.photoLink);
+
+            //$("")
+             // $("friend-name").val(""),
+             // $("photoLink").val("")
           });
+
+      
+    
+        $("#myModal").modal({show: true});
+    
+
+         
   });
   function runFriendQuery() {
   
