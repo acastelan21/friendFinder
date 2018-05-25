@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Friend Finder</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   
 </head>
 <body>
     <div class="container">
@@ -14,8 +16,8 @@
     <form role="form">
 
             <div class="form-group">
-              <label for="reserve-name">Name (Required)</label>
-              <input type="text" class="form-control" id="reserve-name">
+              <label for="friend-name">Name (Required)</label>
+              <input type="text" class="form-control" id="friend-name">
             </div>
 
             <div class="form-group">
@@ -140,14 +142,79 @@
 
     <br>
     <br>
+    <button type="submit" class="btn btn-primary submit" id="add-btn">Submit</button>
           </form>
 
 
-    <button type="submit" class="btn btn-primary submit">Submit</button>
+   
     </div>
     <hr>
     <footer>
       <!--links for json and github-->  
     </footer>
+    
 </body>
 </html>
+<script type="text/javascript">
+  console.log("script working");
+  $(".submit").on("click", function(event) {
+      event.preventDefault();
+      
+      var newFriend = {
+          name: $("#friend-name").val().trim(),
+          photo: $("#photoLink").val().trim(), 
+          scores: [
+                      $("#q1").val(),
+                      $("#q2").val(),
+                      $("#q3").val(),
+                      $("#q4").val(),
+                      $("#q5").val(),
+                      $("#q6").val(),
+                      $("#q7").val(),
+                      $("#q8").val(),
+                      $("#q9").val(),
+                      $("#q10").val(),
+          ]
+      };
+      console.log(newFriend);
+      $.post("/api/friends", newFriend,
+          function(data){
+            console.log("inside function")
+              if(data){
+                  alert("It's working")
+              }
+              else{
+                  alert("Not working")
+              }
+              $("friend-name").val(""),
+              $("photoLink").val("")
+          });
+  });
+  function runFriendQuery() {
+  
+  // Here we get the location of the root page.
+  // We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+  var currentURL = window.location.origin;
+  
+  // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+  $.ajax({ url: currentURL + "/api/friends", method: "GET" })
+    .then(function(friend) {
+  
+    // Here we are logging the URL so we have access to it for troubleshooting
+      console.log("------------------------------------");
+      console.log("URL: " + currentURL + "/api/friends");
+      console.log("------------------------------------");
+  
+      // Here we then log the NYTData to console, where it will show up as an object.
+      console.log(friend);
+      console.log("------------------------------------");
+  
+      
+      })}
+    
+  
+  
+  runFriendQuery();
+  </script>
+
+

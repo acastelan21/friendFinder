@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended: true }));
 app.use(bodyParser.json()); 
 
 // routes to files 
+require("./app/routing/apiRoutes.js")(app);
 require("./app/routing/htmlRoutes.js")(app);
 
 app.listen(PORT, function(){
